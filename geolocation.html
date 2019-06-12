@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Antibiotics</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js"></script>
+  <script src="https://unpkg.com/esri-leaflet@2.2.4/dist/esri-leaflet.js"
+    integrity="sha512-tyPum7h2h36X52O2gz+Pe8z/3l+Y9S1yEUscbVs5r5aEY5dFmP1WWRY/WLLElnFHa+k1JBQZSCDGwEAnm2IxAQ=="
+    crossorigin=""></script>
+
+<link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.css"
+    integrity="sha512-v5YmWLm8KqAAmg5808pETiccEohtt8rPVMGQ1jA6jqkWVydV5Cuz3nJ9fQ7ittSxvuqsvI9RSGfVoKPaAJZ/AQ=="
+    crossorigin="">
+  <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js"
+    integrity="sha512-zdT4Pc2tIrc6uoYly2Wp8jh6EPEWaveqqD3sT0lf5yei19BC1WulGuh5CesB0ldBKZieKGD7Qyf/G0jdSe016A=="
+    crossorigin="">
+</script>
+
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+<script src="http://code.jquery.com/jquery-1.11.3.min.js">
+
+</script>
+
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+
+</head>
+<body>
+
+<div id="mapid" style="width: 1600px; height: 900px;"></div>
+<script>
+ if(navigator.geolocation==undefined){
+                           alert("Geolocation undefined");
+ 
+              }else{
+                           alert("Geolocation Available");
+                           navigator.geolocation.getCurrentPosition(userLocated,locationError);
+                           
+                           function userLocated(position){
+                                         var latitude=position.coords.latitude;
+                                         var longitude=position.coords.longitude;
+                                         alert("Lat:" + latitude +", Long:" + longitude);
+										 var mymap = L.map('mapid').setView([latitude, longitude], 10);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+maxZoom: 19,
+attribution: 'Map data &copy;'+
+'<a href="https://www.openstreetmap.org/">OpenStreetMap</a>'+
+'contributors,<a href="https://creativecommons.org/licenses'+
+'/by-sa/2.0/">CC-BY-SA</a>,Imagery © <a href="https://'+
+'www.mapbox.com/">Mapbox</a>',
+id: 'mapbox.streets',
+accessToken:'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYyc'+
+'XBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
+}).addTo(mymap);
+let isClicked = false;
+var marker = L.marker([latitude, longitude]).addTo(mymap);
+var marker1 = L.marker([-20.278033,57.4743163]).addTo(mymap);
+var marker2 = L.marker([-20.1661719,57.5181342]).addTo(mymap);
+var marker3 = L.marker([-20.1661719,57.5181342]).addTo(mymap);
+var marker4 = L.marker([-20.2795717,57.4851753]).addTo(mymap);
+var marker5 = L.marker([-20.0966988,57.5571034]).addTo(mymap);
+marker1.bindPopup("Victoria Hospital");
+marker2.bindPopup("Dr AG Jetoo Hospital");
+marker3.bindPopup("Welkin Hospital");
+marker4.bindPopup("Jawaharlal Nehru Hospital");
+marker5.bindPopup("Sir Seewoosagur Ramgoolam National (SSRN) Hospital");
+marker1.on({
+    mouseover: function() {
+        if(!isClicked) {
+            this.openPopup()
+        }
+    }
+    });
+    marker2.on({
+    mouseover: function() {
+        if(!isClicked) {
+            this.openPopup()
+        }
+    }
+    });
+    marker3.on({
+    mouseover: function() {
+        if(!isClicked) {
+            this.openPopup()
+        }
+    }
+    });
+    marker4.on({
+    mouseover: function() {
+        if(!isClicked) {
+            this.openPopup()
+        }
+    }
+    });
+    marker5.on({
+    mouseover: function() {
+        if(!isClicked) {
+            this.openPopup()
+        }
+    }
+    });
+var circle = L.circle([latitude, longitude], {
+color: 'red',
+fillColor: '#f03',
+fillOpacity: 0.5,
+radius: 100
+}).addTo(mymap);
+circle.bindPopup("Current location of user");
+
+                           
+
+
+ var searchControl = L.esri.Geocoding.geosearch().addTo(mymap);
+
+  var results = L.layerGroup().addTo(mymap);
+
+  searchControl.on('results', function(data){
+    results.clearLayers();
+    for (var i = data.results.length - 1; i >= 0; i--) {
+      results.addLayer(L.marker(data.results[i].latlng));
+    }
+ });
+                         }
+						   }
+						   
+						   
+ 
+                           function locationError(error){
+                                         switch(error.code){
+                                                       case error.PERMISSION_DENIED:
+                                                          alert("Permission Denied-" + error.message);
+                                                          break;
+                                                       case error.POSITION_UNAVAILABLE:
+                                                          alert("Position not Available- "+ error.message);
+                                                          break;
+                                                       case error.TIMEOUT:
+                                                          alert("Request Timed Out- " + error.message);
+                                                          break;
+                                                          }
+ 
+                           }
+                           
+</script>
+<div class="center">
+	<a href="../assignment_mobile/home.html" class="center" data-iconpos="notext" data-role="button" data-icon="back">Back</a>
+	</div>
+     </div>
+ <div data-role="footer">
+	<h2> &copy BSE17BFT Overuse of antibiotics  </h2>
+ </div>
+</body>
+</html>

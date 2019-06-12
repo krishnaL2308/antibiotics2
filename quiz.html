@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+   <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+        <title>Quiz</title>
+		
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery.mobile-1.4.5.min.js"></script>
+     <link href='https://fonts.googleapis.com/css?family=Crimson+Text' rel='stylesheet' type='text/css'> 
+  
+	<style>
+	
+	
+	* {
+    font-family: "Crimson Text", serif;
+}
+
+body {
+    background: #f46b45; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #f46b45 , #eea849); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #f46b45 , #eea849); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#form {
+    width: 65%;
+    margin-left: 35%;
+}
+
+.right {
+    text-align: right;
+    margin-top: -45px;
+}
+
+.center {
+    text-align: center;
+}
+
+.container {
+    margin: 50px auto;
+    width: 500px;
+    border: 2px solid black;
+    padding: 3% 3%;
+    background: rgba(0, 0, 20, 0.3);
+}
+
+button {
+    margin: 15px auto 0 auto;
+    display: block;
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-size: 1.25em;
+    background: black;
+    color: white;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    color: black;
+    background: white;
+}
+
+label {
+    font-size: 1.25em;
+    padding: 1%;
+}
+
+@media only screen and (max-width: 550px) {
+    .container {
+        width: 94%;
+    }
+}
+	
+	
+	</style>
+	
+	
+    </head>
+    <body>
+        <script type="text/javascript" src="cordova.js"></script>
+		
+		
+		
+    <div class="container">
+
+        <header>
+            <div class="center">
+                <h1>Antibiotics Quiz</h1>
+            </div>
+        </header>
+
+        <section id="instructions" class="center">
+            <h2>How much do you know about antibiotics?</h2>
+            <h3>Test your knowledge about antibiotics.</h3>
+            <button id="startBtn">Start</button>
+        </section>
+
+        <section id="quiz">
+            <div>
+                <h3 class="left">Score:  <span id="displayScore">0</span></h3>
+                <h3 class="right">Question: <span id="displayQCount">1</span> of  12</h3>
+            </div>
+            <div>
+                <h2 id="askQuestion" class="center"></h2>
+
+                <form id="form">
+                    <div>
+                        <input id="label0" type="radio" name="option" value="">
+                        <label id="answer0" for=""></label>
+                    </div>
+                    <div>
+                        <input id="label1" type="radio" name="option" value="">
+                        <label id="answer1" for=""></label>
+                    </div>
+                    <div>
+                        <input id="label2" type="radio" name="option" value="">
+                        <label id="answer2" for=""></label>
+                    </div>
+                   
+                </form>
+
+            <button id="submitBtn">Submit</button>
+            </div>
+        </section>
+
+        <section id="showScore">
+            <h2 id="inform" class="center"></h2>
+            <button id="resetBtn">Try Again?</button>
+        </section>
+
+    </div>
+
+<!-- JavaScript -->
+		
+		
+		<script type="text/javascript">
+		
+		
+		
+		var instructions = document.getElementById("instructions");
+var quiz = document.getElementById("quiz");
+var startBtn = document.getElementById("startBtn");
+var askQuestion = document.getElementById("askQuestion");
+var submitBtn = document.getElementById("submitBtn");
+var resetBtn = document.getElementById("resetBtn");
+var form = document.getElementById("form");
+var quiz = document.getElementById("quiz");
+var inform = document.getElementById("inform");
+var showScore = document.getElementById("showScore");
+var displayScore = document.getElementById("displayScore");
+var displayQCount = document.getElementById("displayQCount");
+var checkedRadio;
+var allRadios;
+var i;
+var score;
+
+var questions = [
+  {
+    question: "Antibiotics treat infections from?",
+    choices: ["Viruses", "Bacteria", "Fungi"],
+    correct: 1
+  },
+  {
+    question: "Antibacterial cleansers may make germs stronger against antibiotics?",
+    choices: ["TRUE", "FALSE"],
+    correct: 1
+  },
+  {
+    question: "Acne treatment can lead to antibiotic resistance?",
+    choices: ["TRUE", "FALSE"],
+    correct: 0
+  },
+  {
+    question: "You always need antibiotics for?",
+    choices: ["Strep throat", "Ear infections", "Sinus infections"],
+    correct: 0
+  },
+  {
+    question: "It’s OK to stop taking antibiotics as soon as you feel better?",
+    choices: ["TRUE","FALSE"],
+    correct: 1
+  },
+  
+  {
+    question: "What prompted the World Health Organization to change treatment guidelines for chlamydia, gonorrhea, and syphilis?",
+    choices: ["The same antibiotics work well for all three","Doctors have created new antibiotic just to treat these conditions","Antibiotics may not work against them anymore"],
+    correct: 2
+  },
+  
+  {
+    question: "How many people each year get bacterial infections that antibiotics don’t help?",
+    choices: ["At least 1.5 million","At least 2 million","At least 4 million"],
+    correct: 1
+  },
+  
+  {
+    question: "The food you eat can prevent antibiotics from helping you?",
+    choices: ["TRUE","FALSE"],
+    correct: 0
+  },
+  
+    {
+    question: "Fewer antibiotics have been created in the past 30 years?",
+    choices: ["TRUE","FALSE"],
+    correct: 0
+  },
+  
+  {
+    question: "How much does antibiotic resistance cost yearly?",
+    choices: ["$50 million","$10 million","$20 million"],
+    correct: 2
+  },
+  
+  {
+    question: "Which germ worries health officials the most?",
+    choices: ["Clostridium difficile(C.diff)","MRSA(methicillin-resistant Staphylococcus aureus)","Drug-resistant tuberculosis"],
+    correct: 0
+  },
+  
+   {
+    question: "It’s OK to take antibiotics prescribed to someone else?",
+    choices: ["TRUE","FALSE"],
+    correct: 1
+  },
+  
+];
+
+window.onload = beginQuiz;
+
+function beginQuiz() {
+    form.style.display = "block";
+    instructions.style.display = "block";
+    showScore.style.display = "none";
+    quiz.style.display = "none";
+    submitBtn.style.display = "none";
+    i = 0;
+    score = 0;
+    displayQCount.innerHTML = 1;
+    displayScore.innerHTML = 0;
+}
+
+startBtn.addEventListener("click", function() {
+    instructions.style.display = "none";
+    submitBtn.style.display = "block";
+    quiz.style.display = "block";
+    getQAs();
+});
+
+submitBtn.addEventListener("click", function() {
+    allRadios = document.getElementsByName("option");
+    var isChecked = false;
+    for (var j = 0; j < allRadios.length; j++) {
+        if (allRadios[j].checked) {
+            isChecked = true;
+            checkedRadio = j;
+            break;
+        }
+    }
+    if (!(isChecked)) {
+        alert("Please select an answer before moving on");
+    } else {
+        getResults();
+        deselectRadios();
+        i++;
+        displayQCount.innerHTML = i + 1;
+        getQAs();
+    }
+});
+
+function deselectRadios() {
+    allRadios = document.getElementsByName("option");
+    for (var p = 0; p < allRadios.length; p++) {
+        allRadios[p].checked = false;
+    }
+}
+
+function getResults() {
+        if (allRadios[checkedRadio].value === questions[i].choices[questions[i].correct]) {
+            score++;
+            displayScore.innerHTML = score;
+        }
+}
+
+function getQAs() {
+    if (i < 12) {
+        askQuestion.innerHTML = questions[i].question;
+        for (var k = 0; k < 3; k++) {
+            document.getElementById("answer" + k).innerHTML = questions[i].choices[k];
+            document.getElementById("answer" + k).setAttribute("for", questions[i].choices[k]);
+            document.getElementById("label" + k).setAttribute("value", questions[i].choices[k]);
+        }
+    } else {
+        displayResults();
+    }
+};
+
+function displayResults() {
+    quiz.style.display = "none";
+    showScore.style.display = "block";
+    inform.innerHTML = "Congratulations!! You scored " + score + " out of 12 correct.";
+};
+
+resetBtn.addEventListener("click", function() {
+    beginQuiz();
+});
+		
+		
+		
+		
+		
+		</script>
+		
+
+    </body>
+
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Antibiotics </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="js/jquery.mobile-1.4.5.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile-1.4.5.js"></script>
+ 
+<script type="text/javascript">
+
+document.addEventListener("deviceready",onDeviceReady, false);
+var db;
+function onDeviceReady(){
+
+alert("Device Ready");
+db = window.openDatabase("reminderDB","1.0","simple demo",2*1024*1024);
+db.transaction(createDB, errorCB, successCB );
+
+}
+function createDB(tx){
+tx.executeSql('CREATE TABLE IF NOT EXISTS antibiotics(id INT,antibiotic_name TEXT, dose TEXT,Time TEXT,Quantity TEXT,Quantity1 TEXT,Quantity2 TEXT,Quantity3 TEXT)');
+}
+function errorCB(err){
+alert("Error: "+err.code);
+
+}
+function successCB(){
+alert("Database and Table CREATED SUCCESSFULLY");
+
+}
+
+function insertDB(tx){
+var Antibioticsname_c=$("[name='antibiotic_name']").val();
+
+var dose_c=$("[name='dose']").val();
+
+
+var Time_c=$("[name='Time']").val();
+
+
+var Quantity_c=$("[name='Quantity']").val();
+
+
+var Quantity1_c=$("[name='Quantity1']").val();
+
+
+
+var Quantity2_c=$("[name='Quantity2']").val();
+
+
+var Quantity3_c=$("[name='Quantity3']").val();
+
+
+var sql='INSERT INTO antibiotics(antibiotic_name,dose,Time,Quantity,Quantity1,Quantity2,Quantity3) VALUES (?,?,?,?,?,?,?)';
+
+
+
+tx.executeSql(sql,[Antibioticsname_c,dose_c,Time_c,Quantity_c,Quantity1_c,Quantity2_c,Quantity3_c], successQueryDB, errorCB);
+}
+
+function successQueryDB(tx){
+alert("Record Inserted");
+tx.executeSql('SELECT * FROM antibiotics', [], renderList, errorCB);
+}
+
+function renderList(tx, results){
+
+var htmlString = ' ';
+var len = results.rows.length;
+for(var i=0; i<len;i++){             
+htmlString+='<li>'+'Antibiotics Name:'+results.rows.item(i).antibiotic_name+'<br>'+'Dose:'+results.rows.item(i).dose+'<br>'+'Time:'+results.rows.item(i).Time+'<br>'+'Before Breakfast:'+results.rows.item(i).Quantity+'<br>'+'After Breakfast:'+results.rows.item(i).Quantity1+'<br>'+'Before Meal:'+results.rows.item(i).Quantity2+'<br>'+'After Meal:'+results.rows.item(i).Quantity3+'</li>';
+}
+$('#resultList').html(htmlString);
+$('#resultList').listview('refresh');
+
+}
+
+
+function dropDB(tx){
+var sqlClear='DROP table antibiotics';
+tx.executeSql(sqlClear);
+}
+function successQueryRM(tx){
+alert("Deleted SUCCESSFULLY");
+
+}
+
+
+function Clear(tx){
+db.transaction(dropDB, successQueryRM, errorCB);
+
+}
+
+
+function submitForm(){
+db.transaction(insertDB, errorCB);
+$.mobile.changePage("#pagetwo", {reverse:false, transition:"slide"});
+return false;
+}
+
+
+
+
+
+</script>
+
+  
+  </head>
+ <body>
+ 
+  <script type="text/javascript" src="cordova.js"></script>
+ 
+ 
+<div data-role="page" id="pageone" data-theme="b">
+<a href="#myPanel" data-role="button" data-iconpos="notext" data-icon="bars">Menu</a>
+	<div data-role="panel" id="myPanel">
+		<h2>Menu</h2>
+	    <a href="home.html" data-ajax="false" data-role="button">Home</a>
+	  <a href="doctor.html" data-ajax="false" data-role="button">Connect with Doctor</a>
+	  <a href="disease.html" data-ajax="false" data-role="button">View Disease</a>
+	  <a href="feedback.html" data-ajax="false" data-role="button">Online feedback</a>
+	  <a href="search.html" data-ajax="false" data-role="button">Search(antibiotics)</a>  
+	<a href="treatement.html" data-ajax="false" data-role="button">Treatment guidelines</a>
+	<a href="set_reminder.html" data-ajax="false" data-role="button">Set New Reminder</a>
+	<a href="input.html" data-ajax="false" data-role="button">My Med List</a>
+	<a href="geolocation.html" data-ajax="false" data-role="button">Laboratory</a>
+	<a href="call.html" data-ajax="false" data-role="button">Emergency Call</a>
+    <a href="detailpush.html" data-ajax="false" data-role="button">Antibiotics Details</a>
+	 <a href="antibiovideo.html" data-ajax="false" data-role="button">Antibiotics videos</a>
+ 	 </div>
+     	
+	
+     <div role="main" class="ui-content">
+	 
+	 
+	  
+ 
+ <h1 align="center">My Medication List</h1>
+	 
+	 
+	 <form method="post" onSubmit="return submitForm()">
+	 
+	 <label class="ui-hidden-accessible">Prescription: </label>
+	 <input name="antibiotic_name" type="text" placeholder="Antibiotics name"/>
+
+
+<label class="ui-hidden-accessible">Doses to take: </label>
+<input name="dose" type="text" placeholder="Doses"/>
+
+
+<label class="ui-hidden-accessible">Time to take: </label>
+<input name="Time" type="time" placeholder="time"/><br>
+
+
+
+<style>
+input[type="checkbox"] {
+  clear: both;
+  float:left;
+  
+}
+</style>
+<input type="checkbox" onclick="toggle('.myClass', this)" ><br>
+<div class="myClass">
+   Before Breakfast
+   <input type="text" placeholder="Quantity" name="Quantity"><br>
+</div>
+
+<input type="checkbox"  onclick="toggle('.myClass2', this)" ><br>
+<div class="myClass2">
+   After Breakfast
+    <input type="text" placeholder="Quantity" name="Quantity1"><br>
+</div>
+
+<input type="checkbox"  onclick="toggle('.myClass3', this)" ><br>
+<div class="myClass3">
+  Before meal
+   <input type="text" placeholder="Quantity" name="Quantity2"><br>
+</div>
+
+<input type="checkbox"  onclick="toggle('.myClass4', this)" ><br>
+<div class="myClass4">
+  After meal
+   <input type="text" placeholder="Quantity" name="Quantity3"><br>
+</div>
+
+<script>
+function toggle(className, obj) {
+    var $input = $(obj);
+     var qty=$('[qty="Quantity"]').val();
+    if ($input.prop('checked')) {
+       
+        console.log(className);
+        localStorage.setItem(className,qty)
+    } 
+}
+</script>
+
+
+<input type="submit" value="submit"/>
+
+
+
+</form>
+</div>
+	 
+
+
+ <div data-role="footer">
+	<h2> &copy BSE17BFT Overuse of antibiotics  </h2>
+ </div>
+</div>
+
+  <div data-role="page" id="pagetwo" data-theme="b">
+   
+   <a href="#myPanel" data-role="button" data-iconpos="notext" data-icon="bars">Menu</a>
+	<div data-role="panel" id="myPanel">
+		<h2>Menu</h2>
+	      <a href="home.html" data-ajax="false" data-role="button">Home</a>
+	  <a href="doctor.html" data-ajax="false" data-role="button">Connect with Doctor</a>
+	  <a href="disease.html" data-ajax="false" data-role="button">View Disease</a>
+	  <a href="feedback.html" data-ajax="false" data-role="button">Online feedback</a>
+	  <a href="search.html" data-ajax="false" data-role="button">Search(antibiotics)</a>  
+	<a href="treatement.html" data-ajax="false" data-role="button">Treatment guidelines</a>
+	<a href="set_reminder.html" data-ajax="false" data-role="button">Set New Reminder</a>
+	<a href="input.html" data-ajax="false" data-role="button">My Med List</a>
+	<a href="geolocation.html" data-ajax="false" data-role="button">Laboratory</a>
+	<a href="call.html" data-ajax="false" data-role="button">Emergency Call</a>
+ 	 </div>
+     	
+	<div data-role="header">
+        <h1>My Med List</h1>
+      </div>
+	  
+	  
+	  
+	  
+	  
+     <div role="main" class="ui-content">
+    
+	
+	<div id="output">
+
+<ul data-role="listview" id="resultList"></ul>
+
+     
+	 
+<button type="button" onClick="Clear()">Clear</button>
+	 
+	 
+ </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+	 
+     <div data-role="footer">
+	<h2> &copy BSE17BFT Overuse of antibiotics  </h2>
+ </div>
+
+  </div>
+
+ </body>
+ </html> 

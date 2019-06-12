@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Antibiotics </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="js/jquery.mobile-1.4.5.css">
+  <script src="js/jquery.js"></script>
+  <script src="js/jquery.mobile-1.4.5.js"></script>
+  
+  
+   <script>
+         	document.addEventListener("deviceready",ondeviceready,false);
+         	function ondeviceready(){
+         		alert("Take your medecine ....");
+         	}
+         	function pushnotification(){
+         		cordova.plugins.notification.local.schedule({
+         				id :1,
+         				title:"Amoxicillin",
+         				text:"250-500 mg 3 times per day for 10 to 14 days."
+         		});
+         	}
+         	function pushnotification1(){
+         		cordova.plugins.notification.local.schedule({
+         				id :2,
+         				title:"Doxycycline",
+         				text:"100-200 mg per day for 7 to 14 days."
+         		});
+         	}
+         	function pushnotification2(){
+         		cordova.plugins.notification.local.schedule({
+         				id :3,
+         				title:"Cephalexin",
+         				text:"500 mg 3 to 4 times per day for 5 days"
+         		});
+         	}
+         	function pushnotification3(){
+         		cordova.plugins.notification.local.schedule({
+         				id :4,
+         				title:"Ciprofloxacin",
+         				text:"500 mg 2 times per day for 5 to 7 days."
+         		});
+         	}
+         	function pushnotification4(){
+         		cordova.plugins.notification.local.schedule({
+         				id :5,
+         				title:"Clindamycin",
+         				text:"300-450 mg 4 times per day for 10 days."
+         		});
+         	}
+         	function pushnotification5(){
+         		cordova.plugins.notification.local.schedule({
+         				id :6,
+         				title:"Metronidazole",
+         				text:"500-750 mg 3 times per day for 5 to 10 days."
+         		});
+         	}
+         	function pushnotification6(){
+         		cordova.plugins.notification.local.schedule({
+         				id :7,
+         				title:"Azithromycin",
+         				text:"250-500 mg one time per day for 5 days."
+         		});
+         	}
+         	function pushnotification7(){
+         		cordova.plugins.notification.local.schedule({
+         				id :8,
+         				title:"Sulfamethoxazole",
+         				text:"800 mg 2 times per day for 5 days."
+         		});
+         	}
+         	function pushnotification8(){
+         		cordova.plugins.notification.local.schedule({
+         				id :9,
+         				title:"Trimethoprim",
+         				text:"160 mg 2 times per day for 5 days."
+         		});
+         	}
+         	function pushnotification9(){
+         		cordova.plugins.notification.local.schedule({
+         				id :10,
+         				title:"Cefdinir",
+         				text:"300-600 mg 1 or 2 times per day for 5 to 10 days."
+         		});
+         	}
+         	function pushnotification10(){
+         		cordova.plugins.notification.local.schedule({
+         				id :11,
+         				title:"Clavulanate",
+         				text:"500-875 mg 2 or 3 times per day for 7 to 10 days."
+         		});
+         	}
+         	function pushnotification11(){
+         		cordova.plugins.notification.local.schedule({
+         				id :12,
+         				title:"Levofloxacin",
+         				text:"750 mg one time per day for 7 to 14 days."
+         		});
+         	}
+         	function pushnotification12(){
+         		cordova.plugins.notification.local.schedule({
+         				id :13,
+         				title:"Prednisolone Sodium Phosphate",
+         				text:"5-60 mg one time per day for one month."
+         		});
+         	}
+         	function pushnotification13(){
+         		cordova.plugins.notification.local.schedule({
+         				id :14,
+         				title:"Singulair (Motelukast Sodium)",
+         				text:"4-10 mg one time per day."
+         		});
+         	}
+         	function pushnotification14(){
+         		cordova.plugins.notification.local.schedule({
+         				id :15,
+         				title:"Codeine Phosphate",
+         				text:"350 mg two times per day."
+         		});
+         	}
+         	function pushnotification15(){
+         		cordova.plugins.notification.local.schedule({
+         				id :16,
+         				title:"Hydrocodone Bitartrate",
+         				text:"6 mg 4 to 6 times per day."
+         		});
+         	}
+         	function pushnotification16(){
+         		cordova.plugins.notification.local.schedule({
+         				id :17,
+         				title:"Acetaminophen",
+         				text:"325-1000 mg one or 4 times per day."
+         		});
+         	}
+         	function pushnotification17(){
+         		cordova.plugins.notification.local.schedule({
+         				id :18,
+         				title:"Mupirocin",
+         				text:"Apply a small amount to the affected area 3 times a day."
+         		});
+         	}
+         	function pushnotification18(){
+         		cordova.plugins.notification.local.schedule({
+         				id :19,
+         				title:"Nystatin",
+         				text:" 400,000 to 600,000 units of the oral suspension orally 4 times a day."
+         		});
+         	}
+         	function pushnotification19(){
+         		cordova.plugins.notification.local.schedule({
+         				id :20,
+         				title:"Methylphenidate",
+         				text:"10-60 mg orally in 2 or 3 divided doses per day, preferably 30 to 45 minutes before meals."
+         		});
+         	}
+         	function pushnotification20(){
+         		cordova.plugins.notification.local.schedule({
+         				id :21,
+         				title:"Dextromethorphan",
+         				text:"Maximum dose: 120 mg in 24 hours."
+         		});
+         	}
+         	function pushnotification21(){
+         		cordova.plugins.notification.local.schedule({
+         				id :22,
+         				title:"Phenylephrine",
+         				text:"10 mg orally every 4 to 6 hours not to exceed 4 doses daily."
+         		});
+         	}
+         	function pushnotification22(){
+         		cordova.plugins.notification.local.schedule({
+         				id :23,
+         				title:"Chlorpheniramin",
+         				text:"8 to 16 mg orally every 8 to 12 hours as needed or 16 mg orally once a day as needed."
+         		});
+         	}
+         	function pushnotification23(){
+         		cordova.plugins.notification.local.schedule({
+         				id :24,
+         				title:"Mometasone",
+         				text:"440 mcg in divided doses of 220 mcg twice a day, or as 440 mcg once daily."
+         		});
+         	}
+         	function pushnotification24(){
+         		cordova.plugins.notification.local.schedule({
+         				id :25,
+         				title:"Triamcinolone",
+         				text:"5 to 15 mg (up to 40 mg) every 3 to 4 weeks."
+         		});
+         	}
+         	function pushnotification25(){
+         		cordova.plugins.notification.local.schedule({
+         				id :26,
+         				title:"Prednisone",
+         				text:" 5 to 60 mg orally per day."
+         		});
+         	}
+        
+
+         </script>
+
+  
+  
+  
+</head>
+<body>
+
+<div data-role="page" id="pageone" data-theme="b">
+<div data-role="panel" id="myPanel">
+	<h2>Menu</h2>
+	   <a href="home.html" data-ajax="false" data-role="button">Home</a>
+	  <a href="doctor.html" data-ajax="false" data-role="button">Connect with Doctor</a>
+	  <a href="disease.html" data-ajax="false" data-role="button">View Disease</a>
+	  <a href="feedback.html" data-ajax="false" data-role="button">Online feedback</a>
+	  <a href="search.html" data-ajax="false" data-role="button">Search(antibiotics)</a>  
+	<a href="treatement.html" data-ajax="false" data-role="button">Treatment guidelines</a>
+	<a href="set_reminder.html" data-ajax="false" data-role="button">Set New Reminder</a>
+	<a href="input.html" data-ajax="false" data-role="button">My Med List</a>
+	<a href="geolocation.html" data-ajax="false" data-role="button">Laboratory</a>
+	<a href="call.html" data-ajax="false" data-role="button">Emergency Call</a>
+	 <a href="detailpush.html" data-ajax="false" data-role="button">Antibiotics Details</a>
+	 <a href="antibiovideo.html" data-ajax="false" data-role="button">Antibiotics videos</a>
+ 	 </div>
+     	<a href="#myPanel" data-role="button" data-iconpos="notext" data-icon="bars">Menu</a>
+     	
+     	  <div role="main" class="ui-content">
+     
+	
+	
+	
+	
+	<br/>
+    	<input type="button" value="Send Notification details for Amoxicillin" onclick="pushnotification();">
+        <input type="button" value="Send Notification details for Doxycycline" onclick="pushnotification1();">
+        <input type="button" value="Send Notification details for Cephalexin" onclick="pushnotification2();">
+        <input type="button" value="Send Notification details for Ciprofloxacin" onclick="pushnotification3();">
+        <input type="button" value="Send Notification details for Clindamycin" onclick="pushnotification4();">
+        <input type="button" value="Send Notification details for Metronidazole" onclick="pushnotification5();">
+        <input type="button" value="Send Notification details for Azithromycin" onclick="pushnotification6();">
+        <input type="button" value="Send Notification details for Sulfamethoxazole" onclick="pushnotification7();">
+        <input type="button" value="Send Notification details for Trimethoprim" onclick="pushnotification8();">
+        <input type="button" value="Send Notification details for Cefdinir" onclick="pushnotification9();">
+        <input type="button" value="Send Notification details for Clavulanate" onclick="pushnotification10();">
+        <input type="button" value="Send Notification details for Levofloxacin" onclick="pushnotification11();">
+        <input type="button" value="Send Notification details for Prednisolone Sodium Phosphate" onclick="pushnotification12();">
+        <input type="button" value="Send Notification details for Singulair (Motelukast Sodium)" onclick="pushnotification13();">
+        <input type="button" value="Send Notification details for Codeine Phosphate" onclick="pushnotification14();">
+        <input type="button" value="Send Notification details for Hydrocodone Bitartrate" onclick="pushnotification15();">
+        <input type="button" value="Send Notification details for Acetaminophen" onclick="pushnotification16();">
+        <input type="button" value="Send Notification details for Mupirocin" onclick="pushnotification17();">
+        <input type="button" value="Send Notification details for Nystatin" onclick="pushnotification18();">
+        <input type="button" value="Send Notification details for Methylphenidate" onclick="pushnotification19();">
+        <input type="button" value="Send Notification details for Dextromethorphan" onclick="pushnotification20();">
+        <input type="button" value="Send Notification details for Phenylephrine" onclick="pushnotification21();">
+        <input type="button" value="Send Notification details for Chlorpheniramin" onclick="pushnotification22();">
+        <input type="button" value="Send Notification details for Mometasone" onclick="pushnotification23();">
+        <input type="button" value="Send Notification details for Triamcinolone" onclick="pushnotification24();">
+        <input type="button" value="Send Notification details for Prednisone" onclick="pushnotification25();">
+
+	
+	
+	
+	
+	
+	
+             </div> <!---close main-->
+     
+     <div data-role="footer">
+	<h2> &copy BSE17BFT Overuse of antibiotics  </h2>
+     </div>
+</div>
